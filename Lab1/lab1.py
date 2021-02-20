@@ -9,30 +9,38 @@ print("""
 Перевірив: Регіда П.Г
 """)
 
-a0, a1, a2, a3 = 2, 4, 6, 8
+a = [2, 4, 6, 8]
 
-x1, x2, x3 = [random.randint(1, 20) for i in range(8)], [random.randint(1, 20) for i in range(8)], [random.randint(1, 20) for i in range(8)]
+x = [[random.randint(1, 20) for i in range(8)], 
+	 [random.randint(1, 20) for i in range(8)], 
+	 [random.randint(1, 20) for i in range(8)]]
 
-x_matrix = numpy.array([x1, x2, x3])
+x_matrix = numpy.array([x[0], x[1], x[2]])
 
-Y = [a0 + (a1 * x1[i]) + (a2 * x2[i]) + (a3 * x3[i]) for i in range(8)]
+Y = [a[0] + (a[1] * x[0][i]) + (a[2] * x[1][i]) + (a[3] * x[2][i]) for i in range(8)]
 
-x01, x02, x03 = (max(x1) + min(x1)) / 2, (max(x2) + min(x2)) / 2, (max(x3) + min(x3)) / 2
+x0 = [(max(x[0]) + min(x[0])) / 2, 
+	  (max(x[1]) + min(x[1])) / 2, 
+	  (max(x[2]) + min(x[2])) / 2]
 
-dx1, dx2, dx3 = x01 - min(x1), x02 - min(x2), x03 - min(x3)
+dx = [x0[0] - min(x[0]),
+      x0[1] - min(x[1]), 
+      x0[2] - min(x[2])]
 
-xn1, xn2, xn3 = [(x1[i] - x01) / dx1 for i in range(8)], [(x2[i] - x02) / dx2 for i in range(8)], [(x3[i] - x03) / dx3 for i in range(8)]
+xn = [[(x[0][i] - x0[0]) / dx[0] for i in range(8)],
+	  [(x[1][i] - x0[1]) / dx[1] for i in range(8)],
+	  [(x[2][i] - x0[2]) / dx[2] for i in range(8)]]
 
-xn_matrix = numpy.array([xn1, xn2, xn3])
+xn_matrix = numpy.array([xn[0], xn[1], xn[2]])
 
-Yet = a0 + (a1 * x01) + (a2 * x02) + (a3 * x03)
+Yet = a[0] + (a[1] * x0[0]) + (a[1] * x0[1]) + (a[2] * x0[2])
 
 result = min([(Y[i] - Yet) ** 2 for i in range(8)])
 
 print("X1 X2 X3:" + "\n", x_matrix.transpose())
 print("Y: ", Y)
-print("x01, x02, x03: ", x01, x02, x03)
-print("dx1, dx2, dx3: ", dx1, dx2, dx3)
+print("x01, x02, x03: ", x0[0], x0[1], x0[2])
+print("dx1, dx2, dx3: ", dx[0], dx[1], dx[2])
 print("Xn1, Xn2, xn3:" + "\n", xn_matrix.transpose())
 print("Yет:", Yet)
 
