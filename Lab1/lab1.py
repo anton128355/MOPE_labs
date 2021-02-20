@@ -36,4 +36,4 @@ print("dx1, dx2, dx3: ", dx1, dx2, dx3)
 print("Xn1, Xn2, xn3:" + "\n", xn_matrix.transpose())
 print("Yет:", Yet)
 
-print(result)
+print("min((Y - Yэт)^2 = ", result)
