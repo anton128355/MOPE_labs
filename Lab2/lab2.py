@@ -1,6 +1,6 @@
 from random import randint
 from math import sqrt
-
+from sys import exit
 print("""
 Лабораторна робота 2 з МОПЕ
 Варіант: 327
@@ -10,11 +10,17 @@ print("""
 
 
 variant = 327
-m = 6
+m = 10
 y_max = (30 - variant) * 10
 y_min = (20 - variant) * 10
 x1_min, x1_max, x2_min, x2_max = 10, 60, -35, 10
 xn = [[-1, -1], [1, -1], [-1, 1]]
+
+
+def choice_cr():
+    table = {5: 2.00, 6: 2.00, 7: 2.17, 8: 2.17, 9: 2.29, 10: 2.29}
+    rkr = table.get(m)
+    return rkr
 
 
 def average_y(lst):
@@ -54,6 +60,7 @@ sigma_t = sqrt((2 * (2 * m - 2)) / (m * (m - 4)))
 Fuv = []
 t = []
 Ruv = []
+Rkr = choice_cr()
 
 Fuv.append(fuv(dispersion(y)[0], dispersion(y)[1]))
 Fuv.append(fuv(dispersion(y)[2], dispersion(y)[0]))
@@ -65,11 +72,17 @@ t.append(((m - 2) / m) * Fuv[2])
 Ruv.append(abs(t[0] - 1) / sigma_t)
 Ruv.append(abs(t[1] - 1) / sigma_t)
 Ruv.append(abs(t[2] - 1) / sigma_t)
-Rkr = 2
+
 
 for i in range(len(Ruv)):
-    if Ruv[i] > Rkr:
-        print('Помилка, повторіть експеримент')
+    try:
+        if Ruv[i] > Rkr:
+            print('Помилка, повторіть експеримент')
+    except TypeError:
+        print("Нестача табличних значень, виберіть корректне m")
+        exit()
+
+
 
 mx1 = (xn[0][0] + xn[1][0] + xn[2][0]) / 3
 mx2 = (xn[0][1] + xn[1][1] + xn[2][1]) / 3
