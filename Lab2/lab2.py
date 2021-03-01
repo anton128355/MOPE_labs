@@ -1,6 +1,8 @@
 from random import randint
 from math import sqrt
 from sys import exit
+
+
 print("""
 Лабораторна робота 2 з МОПЕ
 Варіант: 327
