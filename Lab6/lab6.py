@@ -1,4 +1,5 @@
 import math
+import time
 import random
 from _decimal import Decimal
 from itertools import compress
@@ -184,8 +185,12 @@ while not cochran_criteria(m, N, y_arr):
     y_arr = generate_y(m, natural_plan)
 
 print_matrix(m, N, natural_plan, y_arr, " для натуралізованих факторів:")
+start_time = time.time()
 coefficients = find_coefficients(natural_plan, y_arr)
-print_equation(coefficients)
-importance = student_criteria(m, N, y_arr, coefficients)
-d = len(list(filter(None, importance)))
-fisher_criteria(m, N, d, natural_plan, y_arr, coefficients, importance)
+if (time.time() - start_time) > 0.1:
+    print("Модель неадекватна")
+else:
+    print_equation(coefficients)
+    importance = student_criteria(m, N, y_arr, coefficients)
+    d = len(list(filter(None, importance)))
+    fisher_criteria(m, N, d, natural_plan, y_arr, coefficients, importance)
